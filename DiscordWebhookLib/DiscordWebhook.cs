@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using DiscordWebhookLib.Discord;
+using Newtonsoft.Json;
 
 namespace DiscordWebhookLib
 {
@@ -33,7 +34,9 @@ namespace DiscordWebhookLib
             {
                 Message.username = "Default chatbot name";
             }
-            HttpResponseMessage responseMessage = client.PostAsJsonAsync<DiscordMessage>(Link, Message).Result;
+            var data = new StringContent(JsonConvert.SerializeObject(Message), Encoding.UTF8, "application/json");
+            //HttpResponseMessage responseMessage = client.PostAsJsonAsync<DiscordMessage>(Link, Message).Result;
+            HttpResponseMessage responseMessage = client.PostAsync(Link, data).Result;
             return responseMessage.StatusCode;
         }
         public HttpStatusCode Log(DiscordMessage Message)
