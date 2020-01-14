@@ -16,7 +16,7 @@ namespace DiscordWebhookLib.Discord
         /// <param name="Embeds">Max length - 10 objects of embed</param>
         /// <remarks>More info in https://discordapp.com/developers/docs </remarks>
         /// </summary>
-        public DiscordMessage(string Content,string Username)
+        public DiscordMessage(string Content,string Username = default)
         {
             this.content = Content;
             this.username = Username;
